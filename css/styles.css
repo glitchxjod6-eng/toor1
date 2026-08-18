@@ -137,6 +137,44 @@ html.lenis, html.lenis body {
 }
 
 /* Kannada font smoothness */
+/* Kannada font smoothness */
 .font-kannada {
     font-family: 'Noto Sans Kannada', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Serif display typography */
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Floating Booking Bar Filter Pills */
+.filter-pill {
+    background: rgba(6, 30, 20, 0.7);
+    border: 1px solid rgba(230, 175, 46, 0.25);
+    color: #9ca3af;
+}
+.filter-pill:hover {
+    color: #E6AF2E;
+    border-color: rgba(230, 175, 46, 0.5);
+}
+.filter-pill.active {
+    background: linear-gradient(135deg, #E6AF2E, #FB8500);
+    color: #061E14;
+    border-color: transparent;
+    box-shadow: 0 0 18px rgba(230, 175, 46, 0.4);
+}
+
+/* Bento Experience Cards */
+.bento-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.bento-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(230, 175, 46, 0.6);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(230, 175, 46, 0.2);
+}
+
+/* Hero Media Card scroll-expansion */
+#heroMediaCard {
+    will-change: transform;
 }

@@ -473,6 +473,7 @@ async function handleAIModalChatSubmit(e) {
 
         const response = await fetch(n8nWebhookUrl, {
             method: 'POST',
+            mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 message: query,
@@ -566,16 +567,36 @@ function generateIntelligentResponse(userQuery, contextData) {
 }
 
 function triggerN8nWebhook(payloadData) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
     fetch(n8nWebhookUrl, {
         method: 'POST',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             brand: "Mantra Miles Tour",
             timestamp: new Date().toISOString(),
             ...payloadData
-        })
+        }),
+        signal: controller.signal
     }).catch(err => {
         console.warn('[Mantra Miles Webhook Event Error]', err);
+    }).finally(() => clearTimeout(timeoutId));
+}
+
+function dispatchBookingPayload() {
+    const basePrice = activePackageContext?.price || 7499;
+    const totalFare = basePrice * (onboardingState.passengerCount || 1);
+    triggerN8nWebhook({
+        event: "whatsapp_booking_confirmed",
+        guest_name: onboardingState.name || 'Valued Guest',
+        phone: onboardingState.phone || '+91 9686078395',
+        package: activePackageContext?.name || 'Goa Luxury Beach Escape',
+        travellers: onboardingState.passengers || '2 Travellers (Couple)',
+        meal_pref: onboardingState.food || 'Pure Veg 🟢',
+        pickup_hub: onboardingState.pickup || 'Indiranagar 100ft Road (10:00 PM)',
+        total_fare: `₹${totalFare.toLocaleString('en-IN')}`,
+        timestamp: new Date().toISOString()
     });
 }
 
@@ -605,5 +626,6 @@ function redirectToWhatsAppPayment(customData = null) {
         `• *Total Est. Fare:* ₹${totalFare.toLocaleString('en-IN')}\n\n` +
         `Hi Aditi, please confirm availability and lock sleeper berths for our trip!`;
 
+    dispatchBookingPayload();
     window.open(`https://wa.me/${phoneTarget}?text=${encodeURIComponent(payloadText)}`, '_blank');
 }

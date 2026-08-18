@@ -18,6 +18,7 @@ const defaultPackagesDB = [
         rating: "5.0 (490+)",
         duration: "3 Days / 2 Nights",
         status: "active",
+        category: "coastal",
         desc: "5-star oceanfront resort in North Goa, private yacht sunset cruise, beach club VIP entry & seafood dining.",
         itinerary: [
             "• Day 1: Board Volvo Sleeper from Bengaluru -> Arrival & Check-in at 5-Star Beach Resort.",
@@ -35,6 +36,7 @@ const defaultPackagesDB = [
         rating: "4.9 (340+)",
         duration: "3 Days / 2 Nights",
         status: "active",
+        category: "hill",
         desc: "Stay at an authentic coffee plantation resort, private waterfall treks, bonfire acoustic sessions, and Abbey Falls.",
         itinerary: [
             "• Day 1: Board Volvo Sleeper -> Check-in Coffee Plantation Resort -> Waterfall Trek.",
@@ -52,6 +54,7 @@ const defaultPackagesDB = [
         rating: "4.8 (280+)",
         duration: "4 Days / 3 Nights",
         status: "active",
+        category: "hill",
         desc: "Nilgiri mountain railway ride, tea tasting in Coonoor, Doddabetta peak sunset view, and Pykara lake speed boating.",
         itinerary: [
             "• Day 1: Volvo Sleeper Arrival -> Nilgiri Mountain Rail Ride to Coonoor.",
@@ -59,6 +62,23 @@ const defaultPackagesDB = [
             "• Day 3: Botanical Gardens Tour -> Chocolate Factory Visit -> Return Volvo."
         ],
         inclusions: ["Multi-Axle Volvo Sleeper", "Heritage Toy Train Tickets", "4-Star Hill Resort Stay", "Boating & Tea Tasting Pass"]
+    },
+    {
+        id: "mysuru",
+        title: "Mysuru Palace & Heritage Trail",
+        price: 5999,
+        image: "https://images.pexels.com/photos/14702568/pexels-photo-14702568.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        badge: "Heritage",
+        rating: "4.9 (210+)",
+        duration: "2 Days / 1 Night",
+        status: "active",
+        category: "heritage",
+        desc: "Royal Mysuru Palace illuminated tour, Chamundi Hill temple darshan, Brindavan Gardens fountain show & heritage market walk.",
+        itinerary: [
+            "• Day 1: Volvo Sleeper Arrival -> Mysuru Palace Illumination Tour -> Brindavan Gardens Fountain Show.",
+            "• Day 2: Chamundi Hill Temple Darshan -> Heritage Market & Silk Weaving Tour -> Evening Volvo Return."
+        ],
+        inclusions: ["Multi-Axle Volvo Sleeper", "4-Star Heritage Hotel Stay", "Palace Entry Tickets", "Temple Darshan Pass"]
     }
 ];
 
@@ -85,6 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCustomItineraryFormListener();
     renderPackagesGrid();
     checkUrlPackageFilter();
+    setupFilterPills();
+    setupHeroSearchForm();
+    initHeroMediaScrollScale();
 });
 
 // ----------------------------------------------------
@@ -95,6 +118,74 @@ function setupCustomItineraryFormListener() {
     if (form) {
         form.addEventListener('submit', generateAIItinerary);
     }
+}
+
+// ----------------------------------------------------
+// 1.5 FLOATING BOOKING BAR: FILTER PILLS + TRAVELLER COUNTER
+// ----------------------------------------------------
+let currentFilterCategory = 'all';
+let travellerCountValue = 2;
+
+function setupFilterPills() {
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            pills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            currentFilterCategory = pill.getAttribute('data-filter') || 'all';
+            applyBentoFilter(currentFilterCategory);
+        });
+    });
+}
+
+function setupHeroSearchForm() {
+    const form = document.getElementById('heroSearchForm');
+    if (form) {
+        form.addEventListener('submit', handleHeroSearch);
+    }
+}
+
+function adjustTravellerCount(delta) {
+    travellerCountValue = Math.max(1, Math.min(20, travellerCountValue + delta));
+    const el = document.getElementById('travellerCount');
+    if (el) el.textContent = travellerCountValue;
+}
+
+function applyBentoFilter(category) {
+    const grid = document.getElementById('packagesGrid');
+    if (!grid) return;
+    const cards = grid.querySelectorAll('[data-package]');
+    const categoryMap = {
+        coastal: ['goa'],
+        spiritual: ['mysuru'],
+        hill: ['coorg', 'ooty'],
+        heritage: ['mysuru'],
+        all: []
+    };
+    if (category === 'custom') {
+        const aiSection = document.getElementById('ai-itinerary');
+        if (aiSection && lenis) lenis.scrollTo(aiSection, { offset: -60 });
+        cards.forEach(c => c.classList.remove('hidden'));
+        return;
+    }
+    const allowed = categoryMap[category] || [];
+    cards.forEach(card => {
+        const pkgId = card.getAttribute('data-package') || '';
+        if (category === 'all' || allowed.includes(pkgId)) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
+    if (lenis) {
+        const pkgSection = document.getElementById('packages');
+        if (pkgSection) lenis.scrollTo(pkgSection, { offset: -60 });
+    }
+}
+
+function filterBentoCategory(category) {
+    const targetPill = document.querySelector(`.filter-pill[data-filter="${category}"]`);
+    if (targetPill) targetPill.click();
 }
 
 function generateAIItinerary(e) {
@@ -358,10 +449,16 @@ function closeLeadModal() {
 
 function submitLeadForm(e) {
     e.preventDefault();
-    const name = document.getElementById('leadUserName').value;
-    const phone = document.getElementById('leadPhone').value;
-    const month = document.getElementById('leadMonth').value;
-    const pkg = document.getElementById('leadPackageInput').value;
+    const nameEl = document.getElementById('leadUserName');
+    const phoneEl = document.getElementById('leadPhone');
+    const monthEl = document.getElementById('leadMonth');
+    const pkgEl = document.getElementById('leadPackageInput');
+    if (!nameEl || !phoneEl || !monthEl || !pkgEl) return;
+
+    const name = nameEl.value;
+    const phone = phoneEl.value;
+    const month = monthEl.value;
+    const pkg = pkgEl.value;
 
     const payloadText = `*MANTRA MILES TOUR - NEXT BATCH LEAD* 🚌\n\n` +
         `• *Package:* ${pkg}\n` +
@@ -446,6 +543,7 @@ function initHeroVideoController() {
 }
 
 function initGSAPAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
     ScrollTrigger.create({
@@ -463,7 +561,28 @@ function initGSAPAnimations() {
     });
 }
 
+function initHeroMediaScrollScale() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    const card = document.getElementById('heroMediaCard');
+    if (!card) return;
+    gsap.fromTo('#heroMediaCard',
+        { scale: 0.92, borderRadius: '32px' },
+        {
+            scale: 1.04,
+            borderRadius: '20px',
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#heroMedia',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        }
+    );
+}
+
 function init3DCardsTilt() {
+    if (window.matchMedia('(hover: none)').matches) return;
     const cards = document.querySelectorAll('.tilt-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -507,8 +626,11 @@ function switchFleetTab(tabId) {
 
 function handleHeroSearch(e) {
     if (e) e.preventDefault();
-    const dest = document.getElementById('searchDestination').value;
-    openVisualShowcaseModal(`Custom Query: ${dest.toUpperCase()}`, 6999);
+    const destEl = document.getElementById('searchDestination');
+    const dest = destEl ? destEl.value : 'Custom';
+    const countEl = document.getElementById('travellerCount');
+    const count = countEl ? countEl.textContent : '2';
+    openVisualShowcaseModal(`Custom Query: ${dest.toUpperCase()} (${count} Travellers)`, 6999);
 }
 
 function toggleMobileMenu() {

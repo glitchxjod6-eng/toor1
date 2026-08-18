@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -36,6 +36,7 @@
                     },
                     fontFamily: {
                         sans: ['Outfit', 'Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
                         kannada: ['Noto Sans Kannada', 'sans-serif'],
                     },
                     boxShadow: {
@@ -169,14 +170,22 @@
         </div>
     </section>
 
-    <!-- SECTION 2: RELOCATED FLOATING SEARCH / BOOKING BAR (OVERLAPPING VIDEO TRANSITION) -->
-    <div id="floatingSearchWrapper" class="relative z-20 max-w-6xl mx-auto px-4 md:px-8 -mt-20 sm:-mt-24 mb-16">
-        <div class="backdrop-blur-2xl bg-obsidian/90 border border-gold/40 rounded-3xl p-5 md:p-7 shadow-glass hover:shadow-gold-glow transition-all duration-500">
-            <form id="heroSearchForm" onsubmit="handleHeroSearch(event)" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                <!-- Destination -->
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                        <i class="fa-solid fa-location-dot"></i> <span>Destination</span>
+    <!-- SECTION 2: FLOATING GLASS BOOKING BAR (FILTER PILLS + QUICK INPUTS + SEARCH CTA) -->
+    <div id="floatingSearchWrapper" class="relative z-20 max-w-6xl mx-auto px-4 md:px-8 -mt-20 sm:-mt-24 mb-12">
+        <div class="glass-panel rounded-3xl p-5 md:p-6 hover:shadow-gold-glow transition-all duration-500">
+            <!-- Filter Pills Row -->
+            <div id="filterPillsRow" class="flex flex-wrap gap-2 mb-4 pb-4 border-b border-gold/15">
+                <button data-filter="all" class="filter-pill active px-4 py-2 rounded-full text-xs font-extrabold transition-all">All Tours</button>
+                <button data-filter="spiritual" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Spiritual & Temple</button>
+                <button data-filter="hill" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Hill Station</button>
+                <button data-filter="custom" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Custom Package</button>
+            </div>
+
+            <form id="heroSearchForm" onsubmit="handleHeroSearch(event)" class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-end">
+                <!-- Location Hub -->
+                <div class="md:col-span-4 space-y-1.5">
+                    <label class="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
+                        <i class="fa-solid fa-location-dot"></i> <span>Location Hub</span>
                     </label>
                     <div class="relative">
                         <select id="searchDestination" class="w-full bg-forestObsidian/90 border border-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
@@ -190,39 +199,113 @@
                     </div>
                 </div>
 
-                <!-- Travel Date -->
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
+                <!-- Date Picker -->
+                <div class="md:col-span-3 space-y-1.5">
+                    <label class="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
                         <i class="fa-solid fa-calendar-days"></i> <span>Travel Date</span>
                     </label>
                     <input type="date" id="searchDate" value="2026-08-20" class="w-full bg-forestObsidian/90 border border-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition-colors cursor-pointer">
                 </div>
 
-                <!-- Passengers / Class -->
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-group"></i> <span>Passengers / Class</span>
+                <!-- Travellers Counter -->
+                <div class="md:col-span-3 space-y-1.5">
+                    <label class="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-group"></i> <span>Travellers</span>
                     </label>
-                    <div class="relative">
-                        <select id="searchPassengers" class="w-full bg-forestObsidian/90 border border-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
-                            <option value="2 Travellers (Volvo Sleeper)">2 Passengers (Volvo Sleeper)</option>
-                            <option value="4 Travellers (Luxury SUV Cab)">4 Passengers (Luxury SUV Cab)</option>
-                            <option value="6+ Travellers (Group Tempo)">6+ Passengers (Group Tempo)</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gold pointer-events-none"></i>
+                    <div class="flex items-center gap-2 bg-forestObsidian/90 border border-gold/30 rounded-xl px-3 py-2.5">
+                        <button type="button" onclick="adjustTravellerCount(-1)" class="w-7 h-7 rounded-lg bg-gold/15 border border-gold/30 text-gold font-black hover:bg-gold hover:text-obsidian transition-all flex items-center justify-center shrink-0"><i class="fa-solid fa-minus text-xs"></i></button>
+                        <span id="travellerCount" class="flex-1 text-center text-sm font-bold text-white">2</span>
+                        <button type="button" onclick="adjustTravellerCount(1)" class="w-7 h-7 rounded-lg bg-gold/15 border border-gold/30 text-gold font-black hover:bg-gold hover:text-obsidian transition-all flex items-center justify-center shrink-0"><i class="fa-solid fa-plus text-xs"></i></button>
                     </div>
                 </div>
 
-                <!-- Gold Arrow CTA Button -->
-                <div>
-                    <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold via-amber to-gold bg-size-200 animate-gradient text-obsidian font-black text-sm uppercase tracking-wider shadow-gold-glow hover:shadow-amber-glow hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                        <span>Search Packages</span>
-                        <i class="fa-solid fa-arrow-right text-base"></i>
+                <!-- Search / Book Now CTA -->
+                <div class="md:col-span-2">
+                    <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-gold via-amber to-gold bg-size-200 animate-gradient text-obsidian font-black text-xs uppercase tracking-wider shadow-gold-glow hover:shadow-amber-glow hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                        <span>Search</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- SECTION 2.5: EXPANDING HERO MEDIA CARD (SCROLL-SCALED LANDSCAPE PREVIEW) -->
+    <section id="heroMedia" class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 mb-20">
+        <div id="heroMediaCard" class="relative h-[55vh] min-h-[360px] rounded-3xl overflow-hidden border border-gold/30 shadow-glass group">
+            <img src="https://images.pexels.com/photos/37633371/pexels-photo-37633371.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Munnar tea plantation landscape" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" id="heroMediaImg">
+            <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/40 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 space-y-3">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/40 text-gold text-[11px] font-extrabold uppercase backdrop-blur-md">
+                    <i class="fa-solid fa-mountain-sun"></i> Featured Escape
+                </span>
+                <h2 class="font-serif text-2xl md:text-4xl font-bold text-white max-w-2xl leading-tight">Where the mist meets the mountains — your next story begins here.</h2>
+                <p class="text-xs md:text-sm text-gray-200 max-w-xl">Curated hill-station & coastal getaways with Volvo sleeper transport and 5-star stays.</p>
+                <button onclick="openVisualShowcaseModal('Coorg Mist & Coffee Estate', 6999)" class="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-amber text-obsidian font-extrabold text-xs shadow-gold-glow hover:scale-105 transition-all">
+                    <span>Explore Featured Trip</span><i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2.75: BENTO-STYLE CATEGORIZED EXPERIENCE GRID -->
+    <section id="bento" class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 mb-20">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+            <div class="space-y-2">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-extrabold uppercase">
+                    <i class="fa-solid fa-grip"></i> Experiences
+                </span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white tracking-tight">Browse by <span class="text-metallic-gold">Vibe</span></h2>
+            </div>
+            <p class="text-xs md:text-sm text-gray-400 max-w-md">Four signature worlds — pick the mood, we'll handle the Volvo, stay & itinerary.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            <!-- Coastal Retreats -->
+            <button onclick="filterBentoCategory('coastal')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
+                <img src="https://images.pexels.com/photos/17928231/pexels-photo-17928231.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Coastal retreats" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
+                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Beaches & Backwaters</span>
+                <div class="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 class="font-serif text-xl font-bold text-white">Coastal Retreats</h3>
+                    <p class="text-[11px] text-gray-200 mt-1">Goa, Kerala houseboats, beach resorts</p>
+                </div>
+            </button>
+
+            <!-- Spiritual Journeys -->
+            <button onclick="filterBentoCategory('spiritual')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
+                <img src="https://images.pexels.com/photos/34071592/pexels-photo-34071592.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Spiritual journeys" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
+                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Temples & Heritage</span>
+                <div class="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 class="font-serif text-xl font-bold text-white">Spiritual Journeys</h3>
+                    <p class="text-[11px] text-gray-200 mt-1">Rameswaram, Mysuru, temple circuits</p>
+                </div>
+            </button>
+
+            <!-- Water & Hill Adventures -->
+            <button onclick="filterBentoCategory('hill')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
+                <img src="https://images.pexels.com/photos/37672619/pexels-photo-37672619.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Hill and water adventures" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
+                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Mist & Peaks</span>
+                <div class="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 class="font-serif text-xl font-bold text-white">Water & Hill Adventures</h3>
+                    <p class="text-[11px] text-gray-200 mt-1">Coorg, Ooty, waterfalls & trekking</p>
+                </div>
+            </button>
+
+            <!-- Heritage Trails -->
+            <button onclick="filterBentoCategory('heritage')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
+                <img src="https://images.pexels.com/photos/33797765/pexels-photo-33797765.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Heritage trails" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
+                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Palaces & Forts</span>
+                <div class="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 class="font-serif text-xl font-bold text-white">Heritage Trails</h3>
+                    <p class="text-[11px] text-gray-200 mt-1">Mysuru Palace, forts, cultural walks</p>
+                </div>
+            </button>
+        </div>
+    </section>
 
     <!-- SECTION 3: FEATURED TOUR PACKAGES (DYNAMIC RENDERER VIA LOCALSTORAGE & REEL FUNNEL) -->
     <section id="packages" class="py-20 relative z-10 px-4 md:px-8 max-w-7xl mx-auto">
@@ -563,8 +646,8 @@
     </div>
 
     <!-- CENTER-SCREEN REAL HUMAN AGENT BOOKING MODAL (ADITI - SENIOR TOUR SPECIALIST WITH CUSTOM ADITI.JPG AVATAR & STRICT FACE-CROPPING) -->
-    <div id="aiBookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-forestObsidian/85 backdrop-blur-xl">
-        <div class="relative w-full max-w-2xl bg-forestObsidian border border-gold/40 rounded-3xl p-6 md:p-8 shadow-gold-glow flex flex-col h-[90vh]">
+    <div id="aiBookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-forestObsidian/85 backdrop-blur-xl overflow-y-auto">
+        <div class="relative w-full max-w-2xl max-h-[90vh] bg-forestObsidian border border-gold/40 rounded-3xl p-5 md:p-8 shadow-gold-glow flex flex-col overflow-y-auto">
             <!-- Header (Real Human Persona Aditi with Custom Local Photo aditi.jpg) -->
             <div class="flex items-center justify-between border-b border-gold/30 pb-3 mb-3 shrink-0">
                 <div class="flex items-center gap-3">
@@ -625,8 +708,8 @@
     </div>
 
     <!-- LEAD CAPTURE MODAL -->
-    <div id="leadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-forestObsidian/85 backdrop-blur-xl">
-        <div class="relative w-full max-w-md bg-forestObsidian border border-gold/40 rounded-3xl p-6 md:p-8 shadow-glass space-y-6">
+    <div id="leadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-forestObsidian/85 backdrop-blur-xl overflow-y-auto">
+        <div class="relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-forestObsidian border border-gold/40 rounded-3xl p-5 md:p-8 shadow-glass space-y-6">
             <button onclick="closeLeadModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
