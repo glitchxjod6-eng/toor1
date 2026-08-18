@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MANTRA MILES TOUR | Unexplored Journey, Unmatched Comfort</title>
     <meta name="description" content="Experience Gen-Z ultra-luxurious travel with Mantra Miles Tour. Book Volvo multi-axle sleeper buses, luxury staycations, charter flights, and custom holiday itineraries.">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <!-- Lenis Smooth Scroll CSS -->
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.min.css">
 
@@ -49,10 +49,10 @@
             }
         }
     </script>
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
-    
+
     <!-- Lenis JS, Three.js & GSAP CDNs -->
     <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -72,7 +72,7 @@
     <div id="reelBanner" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-50 max-w-xl w-[90%] backdrop-blur-2xl bg-forestObsidian/95 border border-gold/60 rounded-2xl p-3 shadow-gold-glow flex items-center justify-between text-xs font-bold text-gold animate-bounce">
         <div class="flex items-center gap-2">
             <i class="fa-solid fa-fire text-amber text-lg"></i>
-            <span id="reelBannerText">🔥 Ad Reel Offer Activated: Displaying exclusive package!</span>
+            <span id="reelBannerText">Ad Reel Offer Activated: Displaying exclusive package!</span>
         </div>
         <button onclick="document.getElementById('reelBanner').classList.add('hidden')" class="text-gray-400 hover:text-white">
             <i class="fa-solid fa-xmark"></i>
@@ -170,47 +170,49 @@
         </div>
     </section>
 
-    <!-- SECTION 2: FLOATING GLASS BOOKING BAR (FILTER PILLS + QUICK INPUTS + SEARCH CTA) -->
-    <div id="floatingSearchWrapper" class="relative z-20 max-w-6xl mx-auto px-4 md:px-8 -mt-20 sm:-mt-24 mb-12">
+    <!-- SECTION 2: FLOATING GLASS BOOKING & FILTER BAR (FILTER PILLS + QUICK INPUTS + SEARCH CTA) -->
+    <div id="floatingSearchWrapper" class="floating-filter-container relative z-20 max-w-6xl mx-auto px-4 md:px-8 -mt-20 sm:-mt-24 mb-12">
         <div class="glass-panel rounded-3xl p-5 md:p-6 hover:shadow-gold-glow transition-all duration-500">
             <!-- Filter Pills Row -->
             <div id="filterPillsRow" class="flex flex-wrap gap-2 mb-4 pb-4 border-b border-gold/15">
                 <button data-filter="all" class="filter-pill active px-4 py-2 rounded-full text-xs font-extrabold transition-all">All Tours</button>
-                <button data-filter="spiritual" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Spiritual & Temple</button>
-                <button data-filter="hill" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Hill Station</button>
-                <button data-filter="custom" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Custom Package</button>
+                <button data-filter="spiritual" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Spiritual Trails</button>
+                <button data-filter="coastal" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Coastal Retreats</button>
+                <button data-filter="hill" class="filter-pill px-4 py-2 rounded-full text-xs font-extrabold transition-all">Hill Stations</button>
             </div>
 
             <form id="heroSearchForm" onsubmit="handleHeroSearch(event)" class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-end">
-                <!-- Location Hub -->
+                <!-- Destination Hub -->
                 <div class="md:col-span-4 space-y-1.5">
                     <label class="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                        <i class="fa-solid fa-location-dot"></i> <span>Location Hub</span>
+                        <i class="fa-solid fa-location-dot"></i> <span>Destination Hub</span>
                     </label>
                     <div class="relative">
                         <select id="searchDestination" class="w-full bg-forestObsidian/90 border border-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
-                            <option value="coorg">Coorg (Madikeri) - Coffee & Mist</option>
-                            <option value="ooty">Ooty & Nilgiri Hills</option>
-                            <option value="mysuru">Mysuru Palace & Heritage</option>
-                            <option value="goa">Goa Beaches & Luxury Resorts</option>
-                            <option value="wayanad">Wayanad Rainforests</option>
+                            <option value="murudeshwar">Murudeshwar - Coastal Temple</option>
+                            <option value="gokarna">Gokarna - Beach Trail</option>
+                            <option value="kukke">Kukke Subramanya - Temple</option>
+                            <option value="dharmasthala">Dharmasthala - Temple</option>
+                            <option value="coorg">Coorg - Coffee & Mist</option>
+                            <option value="ooty">Ooty - Nilgiri Hills</option>
+                            <option value="goa">Goa - Beaches & Resorts</option>
                         </select>
                         <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gold pointer-events-none"></i>
                     </div>
                 </div>
 
-                <!-- Date Picker -->
+                <!-- Date Selector -->
                 <div class="md:col-span-3 space-y-1.5">
                     <label class="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                        <i class="fa-solid fa-calendar-days"></i> <span>Travel Date</span>
+                        <i class="fa-solid fa-calendar-days"></i> <span>Date</span>
                     </label>
                     <input type="date" id="searchDate" value="2026-08-20" class="w-full bg-forestObsidian/90 border border-gold/30 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold transition-colors cursor-pointer">
                 </div>
 
-                <!-- Travellers Counter -->
+                <!-- Guest Counter -->
                 <div class="md:col-span-3 space-y-1.5">
                     <label class="text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-group"></i> <span>Travellers</span>
+                        <i class="fa-solid fa-user-group"></i> <span>Guests</span>
                     </label>
                     <div class="flex items-center gap-2 bg-forestObsidian/90 border border-gold/30 rounded-xl px-3 py-2.5">
                         <button type="button" onclick="adjustTravellerCount(-1)" class="w-7 h-7 rounded-lg bg-gold/15 border border-gold/30 text-gold font-black hover:bg-gold hover:text-obsidian transition-all flex items-center justify-center shrink-0"><i class="fa-solid fa-minus text-xs"></i></button>
@@ -219,10 +221,10 @@
                     </div>
                 </div>
 
-                <!-- Search / Book Now CTA -->
+                <!-- Explore / Book CTA -->
                 <div class="md:col-span-2">
                     <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-gold via-amber to-gold bg-size-200 animate-gradient text-obsidian font-black text-xs uppercase tracking-wider shadow-gold-glow hover:shadow-amber-glow hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                        <span>Search</span>
+                        <span>Explore</span>
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </button>
                 </div>
@@ -230,80 +232,70 @@
         </div>
     </div>
 
-    <!-- SECTION 2.5: EXPANDING HERO MEDIA CARD (SCROLL-SCALED LANDSCAPE PREVIEW) -->
-    <section id="heroMedia" class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 mb-20">
-        <div id="heroMediaCard" class="relative h-[55vh] min-h-[360px] rounded-3xl overflow-hidden border border-gold/30 shadow-glass group">
-            <img src="https://images.pexels.com/photos/37633371/pexels-photo-37633371.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Munnar tea plantation landscape" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105" id="heroMediaImg">
-            <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/40 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 space-y-3">
+    <!-- SECTION 2.5: SCROLL-EXPANDING HERO MEDIA SHOWCASE -->
+    <section id="heroMedia" class="expanding-media-section relative z-10 px-0 md:px-4 mb-20">
+        <div id="heroMediaCard" class="hero-media-card relative h-[50vh] min-h-[320px] md:h-[60vh] overflow-hidden shadow-glass group mx-auto">
+            <img src="https://images.pexels.com/photos/35775960/pexels-photo-35775960.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Murudeshwar coastal temple landscape" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105" id="heroMediaImg">
+            <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-12 space-y-3 text-center md:text-left">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/15 border border-gold/40 text-gold text-[11px] font-extrabold uppercase backdrop-blur-md">
-                    <i class="fa-solid fa-mountain-sun"></i> Featured Escape
+                    <i class="fa-solid fa-spa"></i> Featured Escape
                 </span>
-                <h2 class="font-serif text-2xl md:text-4xl font-bold text-white max-w-2xl leading-tight">Where the mist meets the mountains — your next story begins here.</h2>
-                <p class="text-xs md:text-sm text-gray-200 max-w-xl">Curated hill-station & coastal getaways with Volvo sleeper transport and 5-star stays.</p>
-                <button onclick="openVisualShowcaseModal('Coorg Mist & Coffee Estate', 6999)" class="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-amber text-obsidian font-extrabold text-xs shadow-gold-glow hover:scale-105 transition-all">
-                    <span>Explore Featured Trip</span><i class="fa-solid fa-arrow-right text-xs"></i>
+                <h2 class="font-serif text-2xl md:text-5xl font-bold text-white max-w-3xl leading-tight">Experience Pure Tranquility</h2>
+                <p class="text-xs md:text-sm text-gray-200 max-w-xl mx-auto md:mx-0">Where ancient temples meet the Arabian Sea. Murudeshwar's towering Shiva statue, pristine beaches, and cliffside resorts — all wrapped in Volvo sleeper comfort.</p>
+                <button onclick="openVisualShowcaseModal('Murudeshwar Coastal Temple Escape', 7999)" class="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold to-amber text-obsidian font-extrabold text-xs shadow-gold-glow hover:scale-105 transition-all">
+                    <span>Explore This Trip</span><i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2.75: BENTO-STYLE CATEGORIZED EXPERIENCE GRID -->
-    <section id="bento" class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 mb-20">
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+    <!-- SECTION 2.75: IMMERSIVE DESTINATION CARDS SHOWCASE -->
+    <section id="destinations" class="destination-grid-section relative z-10 max-w-7xl mx-auto px-4 md:px-8 mb-20">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <div class="space-y-2">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-extrabold uppercase">
-                    <i class="fa-solid fa-grip"></i> Experiences
+                    <i class="fa-solid fa-map-location-dot"></i> Signature Destinations
                 </span>
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white tracking-tight">Browse by <span class="text-metallic-gold">Vibe</span></h2>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white tracking-tight">Explore <span class="text-metallic-gold">Karnataka's</span> Hidden Gems</h2>
             </div>
-            <p class="text-xs md:text-sm text-gray-400 max-w-md">Four signature worlds — pick the mood, we'll handle the Volvo, stay & itinerary.</p>
+            <p class="text-xs md:text-sm text-gray-400 max-w-md">Scroll to reveal immersive destination stories — each crafted with temple trails, coastal sunsets, and misty highlands.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            <!-- Coastal Retreats -->
-            <button onclick="filterBentoCategory('coastal')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
-                <img src="https://images.pexels.com/photos/17928231/pexels-photo-17928231.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Coastal retreats" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
-                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Beaches & Backwaters</span>
-                <div class="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 class="font-serif text-xl font-bold text-white">Coastal Retreats</h3>
-                    <p class="text-[11px] text-gray-200 mt-1">Goa, Kerala houseboats, beach resorts</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
+            <!-- Murudeshwar & Gokarna Coastal Card -->
+            <article class="dest-card group relative h-[440px] rounded-3xl overflow-hidden border border-gold/25 shadow-glass" data-reveal>
+                <div class="absolute inset-0 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/27793473/pexels-photo-27793473.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Murudeshwar and Gokarna coastal" class="dest-card-img w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110">
                 </div>
-            </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/25 to-transparent"></div>
+                <span class="absolute top-5 left-5 px-3 py-1 rounded-full bg-forestObsidian/70 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Coastal & Spiritual</span>
+                <div class="absolute bottom-0 left-0 right-0 p-6 space-y-2">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-white">Murudeshwar & Gokarna</h3>
+                    <p class="text-[12px] text-gray-200 leading-relaxed">World's second-tallest Shiva statue and golden beach promenade at Murudeshwar, paired with Gokarna's cliff treks between Om Beach and Kudle — temple town charm meets coastal serenity.</p>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-gold font-black text-sm">From ₹7,999 <span class="text-gray-400 font-normal text-xs">/person</span></span>
+                        <button onclick="openVisualShowcaseModal('Murudeshwar & Gokarna Coastal Escape', 7999)" class="px-4 py-2 rounded-lg bg-gradient-to-r from-gold to-amber text-obsidian font-extrabold text-[11px] hover:scale-105 transition-all">Book Now</button>
+                    </div>
+                </div>
+            </article>
 
-            <!-- Spiritual Journeys -->
-            <button onclick="filterBentoCategory('spiritual')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
-                <img src="https://images.pexels.com/photos/34071592/pexels-photo-34071592.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Spiritual journeys" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
-                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Temples & Heritage</span>
-                <div class="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 class="font-serif text-xl font-bold text-white">Spiritual Journeys</h3>
-                    <p class="text-[11px] text-gray-200 mt-1">Rameswaram, Mysuru, temple circuits</p>
+            <!-- Kukke & Dharmasthala Temple Card -->
+            <article class="dest-card group relative h-[440px] rounded-3xl overflow-hidden border border-gold/25 shadow-glass" data-reveal>
+                <div class="absolute inset-0 overflow-hidden">
+                    <img src="https://images.pexels.com/photos/38921995/pexels-photo-38921995.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Kukke and Dharmasthala temple" class="dest-card-img w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110">
                 </div>
-            </button>
-
-            <!-- Water & Hill Adventures -->
-            <button onclick="filterBentoCategory('hill')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
-                <img src="https://images.pexels.com/photos/37672619/pexels-photo-37672619.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Hill and water adventures" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
-                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Mist & Peaks</span>
-                <div class="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 class="font-serif text-xl font-bold text-white">Water & Hill Adventures</h3>
-                    <p class="text-[11px] text-gray-200 mt-1">Coorg, Ooty, waterfalls & trekking</p>
+                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/25 to-transparent"></div>
+                <span class="absolute top-5 left-5 px-3 py-1 rounded-full bg-forestObsidian/70 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Spiritual Trail</span>
+                <div class="absolute bottom-0 left-0 right-0 p-6 space-y-2">
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-white">Kukke & Dharmasthala</h3>
+                    <p class="text-[12px] text-gray-200 leading-relaxed">Sacred serpent deity darshan at Kukke Subramanya nestled in the Western Ghats, combined with Dharmasthala's renowned Manjunatha temple and charitable heritage — a soul-stirring pilgrimage circuit.</p>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-gold font-black text-sm">From ₹5,499 <span class="text-gray-400 font-normal text-xs">/person</span></span>
+                        <button onclick="openVisualShowcaseModal('Kukke & Dharmasthala Temple Trail', 5499)" class="px-4 py-2 rounded-lg bg-gradient-to-r from-gold to-amber text-obsidian font-extrabold text-[11px] hover:scale-105 transition-all">Book Now</button>
+                    </div>
                 </div>
-            </button>
-
-            <!-- Heritage Trails -->
-            <button onclick="filterBentoCategory('heritage')" class="bento-card group relative h-72 rounded-3xl overflow-hidden border border-gold/25 shadow-glass text-left">
-                <img src="https://images.pexels.com/photos/33797765/pexels-photo-33797765.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Heritage trails" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                <div class="absolute inset-0 bg-gradient-to-t from-forestObsidian via-forestObsidian/30 to-transparent"></div>
-                <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-forestObsidian/80 border border-gold/30 text-gold text-[10px] font-bold backdrop-blur-md">Palaces & Forts</span>
-                <div class="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 class="font-serif text-xl font-bold text-white">Heritage Trails</h3>
-                    <p class="text-[11px] text-gray-200 mt-1">Mysuru Palace, forts, cultural walks</p>
-                </div>
-            </button>
+            </article>
         </div>
     </section>
 
@@ -551,7 +543,7 @@
         </div>
 
         <div class="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500 gap-4">
-            <p>© 2026 Mantra Miles Tour Pvt. Ltd. All rights reserved.</p>
+            <p>(c) 2026 Mantra Miles Tour Pvt. Ltd. All rights reserved.</p>
             <div class="flex gap-4">
                 <a href="#" class="hover:text-gray-400">Privacy Policy</a>
                 <a href="#" class="hover:text-gray-400">Terms of Service</a>
@@ -638,7 +630,7 @@
             <!-- HIGH-CONVERSION STICKY BOTTOM DOCK CTA BUTTON -->
             <div class="sticky bottom-0 z-50 p-4 bg-forestObsidian/95 backdrop-blur-md border-t border-gold/30 shrink-0">
                 <button onclick="proceedFromShowcaseToAditiChat()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-gold via-amber to-gold bg-size-200 animate-gradient text-obsidian font-black text-xs sm:text-sm uppercase tracking-wider shadow-gold-glow hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                    <span>🚀 Proceed to Instant Booking with Aditi</span>
+                    <span>Proceed to Instant Booking with Aditi</span>
                     <i class="fa-solid fa-arrow-right text-sm"></i>
                 </button>
             </div>
@@ -660,7 +652,7 @@
                             <span class="text-[10px] text-gray-300 bg-obsidian px-2 py-0.5 rounded-full border border-gold/30">Senior Tour Specialist</span>
                         </div>
                         <span class="text-[10px] text-emerald-400 font-bold flex items-center gap-1.5 mt-0.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 🟢 Active Onboarding Desk
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active Onboarding Desk
                         </span>
                     </div>
                 </div>
@@ -715,14 +707,14 @@
             </button>
 
             <div>
-                <span class="text-xs font-bold text-amber uppercase tracking-wider block mb-1">🔔 Next Batch Notification</span>
+                <span class="text-xs font-bold text-amber uppercase tracking-wider block mb-1">Next Batch Notification</span>
                 <h3 class="text-2xl font-extrabold text-white" id="leadPackageTitle">Trip Package</h3>
                 <p class="text-xs text-gray-400 mt-1">Leave details to get priority WhatsApp alert when next batch opens!</p>
             </div>
 
             <form id="leadCaptureForm" onsubmit="submitLeadForm(event)" class="space-y-4">
                 <input type="hidden" id="leadPackageInput">
-                
+
                 <div>
                     <label class="block text-xs font-bold uppercase text-gold mb-1">Your Full Name</label>
                     <input type="text" id="leadUserName" required placeholder="e.g. Ananya Rao" class="w-full bg-obsidian/80 border border-gold/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-gold">
@@ -760,7 +752,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-black text-gold">Master Admin Dashboard</h3>
-                        <span class="text-xs text-gray-400">Live localStorage Editor • Password Gate Verified</span>
+                        <span class="text-xs text-gray-400">Live localStorage Editor - Password Gate Verified</span>
                     </div>
                 </div>
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">
@@ -773,7 +765,7 @@
                     <thead>
                         <tr class="border-b border-gold/30 text-xs font-bold uppercase text-gold">
                             <th class="py-2 px-2">Package Title</th>
-                            <th class="py-2 px-2">Price (₹)</th>
+                            <th class="py-2 px-2">Price (INR)</th>
                             <th class="py-2 px-2">Status</th>
                             <th class="py-2 px-2">Image URL</th>
                         </tr>

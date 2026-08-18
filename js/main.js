@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFilterPills();
     setupHeroSearchForm();
     initHeroMediaScrollScale();
+    initDestinationCardReveal();
 });
 
 // ----------------------------------------------------
@@ -159,15 +160,8 @@ function applyBentoFilter(category) {
         coastal: ['goa'],
         spiritual: ['mysuru'],
         hill: ['coorg', 'ooty'],
-        heritage: ['mysuru'],
         all: []
     };
-    if (category === 'custom') {
-        const aiSection = document.getElementById('ai-itinerary');
-        if (aiSection && lenis) lenis.scrollTo(aiSection, { offset: -60 });
-        cards.forEach(c => c.classList.remove('hidden'));
-        return;
-    }
     const allowed = categoryMap[category] || [];
     cards.forEach(card => {
         const pkgId = card.getAttribute('data-package') || '';
@@ -562,23 +556,50 @@ function initGSAPAnimations() {
 }
 
 function initHeroMediaScrollScale() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     const card = document.getElementById('heroMediaCard');
     if (!card) return;
-    gsap.fromTo('#heroMediaCard',
-        { scale: 0.92, borderRadius: '32px' },
-        {
-            scale: 1.04,
-            borderRadius: '20px',
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#heroMedia',
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true
+
+    if (!('IntersectionObserver' in window)) {
+        card.classList.add('expanded');
+        return;
+    }
+
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
+                card.classList.add('expanded');
+            } else if (!entry.isIntersecting) {
+                card.classList.remove('expanded');
             }
-        }
-    );
+        });
+    }, {
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: '-10% 0px -10% 0px'
+    });
+    heroObserver.observe(card);
+}
+
+function initDestinationCardReveal() {
+    const revealElems = document.querySelectorAll('[data-reveal]');
+    if (revealElems.length === 0) return;
+
+    if (!('IntersectionObserver' in window)) {
+        revealElems.forEach(el => el.classList.add('revealed'));
+        return;
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+    });
+    revealElems.forEach(el => revealObserver.observe(el));
 }
 
 function init3DCardsTilt() {
