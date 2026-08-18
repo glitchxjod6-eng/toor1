@@ -1,0 +1,142 @@
+/* Custom Aesthetics & Styling System for Mantra Miles Tour (Dual View System) */
+
+/* Refined Luxury Green Color Palette */
+:root {
+    --forest-emerald: #061E14;
+    --deep-jade: #0A2E1F;
+    --metallic-gold: #E6AF2E;
+    --bright-emerald: #218359;
+    --cyan-glow: #00F5D4;
+}
+
+/* Initial Hidden State for Timed 3-Second Delay Hero Overlay Text */
+#heroTextWrapper {
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+    will-change: opacity, transform;
+}
+
+/* Lenis JS Smooth Scroll setup */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+@layer utilities {
+    .bg-size-200 {
+        background-size: 200% 200%;
+    }
+}
+
+@keyframes animate-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+    animation: animate-gradient 4s ease infinite;
+}
+
+/* Metallic Gold Typography */
+.text-metallic-gold {
+    color: #E6AF2E;
+    background: linear-gradient(135deg, #FFF099 0%, #E6AF2E 50%, #B37D00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(230, 175, 46, 0.45);
+}
+
+/* Custom Scrollbar in Dark Forest Emerald & Gold */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #061E14;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #E6AF2E, #218359);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #00F5D4;
+}
+
+/* Dark Emerald Glassmorphism Classes (blur 16px) */
+.glass-panel {
+    background: rgba(10, 46, 31, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(230, 175, 46, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+}
+
+.glass-header {
+    background: rgba(6, 30, 20, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(230, 175, 46, 0.2);
+}
+
+/* 3D Card Hover Tilt Effects */
+.tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.tilt-card:hover {
+    box-shadow: 0 20px 40px rgba(230, 175, 46, 0.25), 0 0 30px rgba(33, 131, 89, 0.4);
+}
+
+/* Reel Highlight Card Pulse */
+.reel-highlight-card {
+    border: 2px solid #E6AF2E !important;
+    box-shadow: 0 0 40px rgba(230, 175, 46, 0.6) !important;
+}
+
+/* Sold Out Package Card Styling for Ads View */
+.sold-out-card {
+    opacity: 0.45;
+    filter: grayscale(80%);
+}
+
+.sold-out-badge {
+    background: rgba(220, 38, 38, 0.3);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+    color: #FCA5A5;
+}
+
+/* Pulse animation for AI widget */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(230, 175, 46, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(33, 131, 89, 0.8), 0 0 15px rgba(230, 175, 46, 0.6);
+    }
+}
+
+#aiWidgetToggle {
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* Kannada font smoothness */
+.font-kannada {
+    font-family: 'Noto Sans Kannada', 'Plus Jakarta Sans', sans-serif;
+}
